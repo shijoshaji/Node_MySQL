@@ -9,15 +9,16 @@ const PORT = 3000;
 const app = express();
 
 // set DB connection
-var db = mysql.createConnection({
+var db = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: '',
   database: 'angcrud',
+  connectionLimit: 100,
 });
 
 // connect to DB
-db.connect((err) => {
+db.getConnection((err) => {
   if (err) {
     throw err;
   }
